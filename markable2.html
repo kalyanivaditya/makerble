@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <a class="navbar-brand" href="#">
+    <img src="makerble.jpeg" alt="Logo" height="50">
+  </a>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Home Redesign</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Your custom CSS styles can go here */
+  </style>
+</head>
+<body style="background-image: url('bg.jpg')";>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="dash.html">My Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#" id="homeLink">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="storiesLink">View Stories</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <div class="container mt-5">
+    <!-- Home Page Content -->
+    <div id="homePage">
+      <h1>Welcome to My Home Redesign</h1>
+      <p>Make it intuitive and less overwhelming.</p>
+
+      <!-- Example form with client-side validation -->
+      <form id="storyForm">
+        <div class="form-group">
+          <label for="story">Create a Story:</label>
+          <input type="text" class="form-control" id="story" required minlength="3">
+          <small class="form-text text-muted">Minimum 3 characters.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Story</button>
+      </form>
+    </div>
+
+    <!-- View Stories Page Content -->
+    <div id="viewStoriesPage" style="display: none;">
+      <h2>View Submitted Stories</h2>
+      <div id="storyList">
+        <!-- Stories will be dynamically added here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+  <script>
+    // Navigation functionality
+    document.getElementById('homeLink').addEventListener('click', function() {
+      document.getElementById('homePage').style.display = 'block';
+      document.getElementById('viewStoriesPage').style.display = 'none';
+    });
+
+    document.getElementById('storiesLink').addEventListener('click', function() {
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('viewStoriesPage').style.display = 'block';
+    });
+
+    // Form submission and validation
+    document.getElementById('storyForm').addEventListener('submit', function(event) {
+      const storyInput = document.getElementById('story');
+      if (storyInput.value.length < 3) {
+        alert('Story must be at least 3 characters long.');
+        event.preventDefault();
+      } else {
+        addStory(storyInput.value);
+        storyInput.value = ''; // Clear input after submission
+        event.preventDefault();
+      }
+    });
+
+    function addStory(storyText) {
+      const storyList = document.getElementById('storyList');
+      const storyCard = document.createElement('div');
+      storyCard.className = 'card mt-2';
+      storyCard.innerHTML = `
+        <div class="card-body">
+          <p class="card-text">${storyText}</p>
+        </div>
+      `;
+      storyList.appendChild(storyCard);
+    }
+  </script>
+
+</body>
+</html>
